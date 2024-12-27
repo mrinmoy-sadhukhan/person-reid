@@ -4,7 +4,7 @@ import os
 import cv2
 import random
 import sys
-
+xrange=range
 def get_pair(path, set, ids, positive):
     pair = []
     pic_name = []

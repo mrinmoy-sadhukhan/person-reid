@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 import cv2
 import market1501_dataset
-
+xrange=range
 FLAGS = tf.flags.FLAGS
 tf.flags.DEFINE_integer('batch_size', '50', 'batch size for training')
 tf.flags.DEFINE_integer('max_steps', '100000', 'max steps for training')

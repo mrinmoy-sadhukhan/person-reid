@@ -4,7 +4,7 @@ import os
 import cv2
 import random
 import sys
-
+xrange=range
 def prepare_data(path):
     f = h5py.File('%s/cuhk-03.mat' % path)
     labeled = [f['labeled'][0][i] for i in xrange(len(f['labeled'][0]))]
