@@ -23,7 +23,7 @@ def preprocess(images, is_train):
         shape = [1 for _ in xrange(split[0].get_shape()[1])]
         for i in xrange(len(split)):
             split[i] = tf.reshape(split[i], [FLAGS.batch_size, IMAGE_HEIGHT, IMAGE_WIDTH, 3])
-            split[i] = tf.image.resize_images(split[i], [IMAGE_HEIGHT + 8, IMAGE_WIDTH + 3])
+            split[i] = tf.image.resize(split[i], [IMAGE_HEIGHT + 8, IMAGE_WIDTH + 3])
             split[i] = tf.split(split[i], shape)
             for j in xrange(len(split[i])):
                 split[i][j] = tf.reshape(split[i][j], [IMAGE_HEIGHT + 8, IMAGE_WIDTH + 3, 3])
@@ -41,7 +41,7 @@ def preprocess(images, is_train):
         shape = [1 for _ in xrange(split[0].get_shape()[1])]
         for i in xrange(len(split)):
             split[i] = tf.reshape(split[i], [FLAGS.batch_size, IMAGE_HEIGHT, IMAGE_WIDTH, 3])
-            split[i] = tf.image.resize_images(split[i], [IMAGE_HEIGHT, IMAGE_WIDTH])
+            split[i] = tf.image.resize(split[i], [IMAGE_HEIGHT, IMAGE_WIDTH])
             split[i] = tf.split(split[i], shape)
             for j in xrange(len(split[i])):
                 split[i][j] = tf.reshape(split[i][j], [IMAGE_HEIGHT, IMAGE_WIDTH, 3])
