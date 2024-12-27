@@ -27,7 +27,7 @@ def preprocess(images, is_train):
             split[i] = tf.split(split[i], shape)
             for j in xrange(len(split[i])):
                 split[i][j] = tf.reshape(split[i][j], [IMAGE_HEIGHT + 8, IMAGE_WIDTH + 3, 3])
-                split[i][j] = tf.random_crop(split[i][j], [IMAGE_HEIGHT, IMAGE_WIDTH, 3])
+                split[i][j] = tf.image.random_crop(split[i][j], [IMAGE_HEIGHT, IMAGE_WIDTH, 3])
                 split[i][j] = tf.image.random_flip_left_right(split[i][j])
                 split[i][j] = tf.image.random_brightness(split[i][j], max_delta=32. / 255.)
                 split[i][j] = tf.image.random_saturation(split[i][j], lower=0.5, upper=1.5)
