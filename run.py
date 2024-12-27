@@ -203,4 +203,4 @@ def main(argv=None):
             print(bool(not np.argmax(prediction[0])))
 
 if __name__ == '__main__':
-    tf.app.run()
+    tf.compat.v1.app.run()
