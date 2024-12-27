@@ -51,7 +51,7 @@ def preprocess(images, is_train):
     return tf.cond(is_train, train, val)
 
 def network(images1, images2, weight_decay):
-    with tf.variable_scope('network'):
+    with tf.compat.v1.variable_scope('network'):
         # Tied Convolution
         conv1_1 = tf.layers.conv2d(images1, 20, [5, 5], activation=tf.nn.relu,
             kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay), name='conv1_1')
