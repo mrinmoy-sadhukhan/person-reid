@@ -114,10 +114,10 @@ def main(argv=None):
     if FLAGS.mode == 'test':
         FLAGS.batch_size = 1
 
-    learning_rate = tf.placeholder(tf.float32, name='learning_rate')
-    images = tf.placeholder(tf.float32, [2, FLAGS.batch_size, IMAGE_HEIGHT, IMAGE_WIDTH, 3], name='images')
-    labels = tf.placeholder(tf.float32, [FLAGS.batch_size, 2], name='labels')
-    is_train = tf.placeholder(tf.bool, name='is_train')
+    learning_rate = tf.compat.v1.placeholder(tf.float32, name='learning_rate')
+    images = tf.compat.v1.placeholder(tf.float32, [2, FLAGS.batch_size, IMAGE_HEIGHT, IMAGE_WIDTH, 3], name='images')
+    labels = tf.compat.v1.placeholder(tf.float32, [FLAGS.batch_size, 2], name='labels')
+    is_train = tf.compat.v1.placeholder(tf.bool, name='is_train')
     global_step = tf.Variable(0, name='global_step', trainable=False)
     weight_decay = 0.0005
     tarin_num_id = 0
