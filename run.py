@@ -53,18 +53,18 @@ def preprocess(images, is_train):
 def network(images1, images2, weight_decay):
     with tf.compat.v1.variable_scope('network'):
         # Tied Convolution
-        conv1_1 = tf.layers.conv2d(images1, 20, [5, 5], activation=tf.nn.relu,
+        conv1_1 = tf.compat.v1.layers.conv2d(images1, 20, [5, 5], activation=tf.nn.relu,
             kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay), name='conv1_1')
-        pool1_1 = tf.layers.max_pooling2d(conv1_1, [2, 2], [2, 2], name='pool1_1')
-        conv1_2 = tf.layers.conv2d(pool1_1, 25, [5, 5], activation=tf.nn.relu,
+        pool1_1 = tf.compat.v1.layers.max_pooling2d(conv1_1, [2, 2], [2, 2], name='pool1_1')
+        conv1_2 = tf.compat.v1.layers.conv2d(pool1_1, 25, [5, 5], activation=tf.nn.relu,
             kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay), name='conv1_2')
-        pool1_2 = tf.layers.max_pooling2d(conv1_2, [2, 2], [2, 2], name='pool1_2')
-        conv2_1 = tf.layers.conv2d(images2, 20, [5, 5], activation=tf.nn.relu,
+        pool1_2 = tf.compat.v1.layers.max_pooling2d(conv1_2, [2, 2], [2, 2], name='pool1_2')
+        conv2_1 = tf.compat.v1.layers.conv2d(images2, 20, [5, 5], activation=tf.nn.relu,
             kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay), name='conv2_1')
-        pool2_1 = tf.layers.max_pooling2d(conv2_1, [2, 2], [2, 2], name='pool2_1')
-        conv2_2 = tf.layers.conv2d(pool2_1, 25, [5, 5], activation=tf.nn.relu,
+        pool2_1 = tf.compat.v1.layers.max_pooling2d(conv2_1, [2, 2], [2, 2], name='pool2_1')
+        conv2_2 = tf.compat.v1.layers.conv2d(pool2_1, 25, [5, 5], activation=tf.nn.relu,
             kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay), name='conv2_2')
-        pool2_2 = tf.layers.max_pooling2d(conv2_2, [2, 2], [2, 2], name='pool2_2')
+        pool2_2 = tf.compat.v1.layers.max_pooling2d(conv2_2, [2, 2], [2, 2], name='pool2_2')
 
         # Cross-Input Neighborhood Differences
         trans = tf.transpose(pool1_2, [0, 3, 1, 2])
@@ -90,24 +90,24 @@ def network(images1, images2, weight_decay):
         k2 = tf.nn.relu(tf.transpose(reshape2, [0, 2, 3, 1]), name='k2')
 
         # Patch Summary Features
-        l1 = tf.layers.conv2d(k1, 25, [5, 5], (5, 5), activation=tf.nn.relu,
+        l1 = tf.compat.v1.layers.conv2d(k1, 25, [5, 5], (5, 5), activation=tf.nn.relu,
             kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay), name='l1')
-        l2 = tf.layers.conv2d(k2, 25, [5, 5], (5, 5), activation=tf.nn.relu,
+        l2 = tf.compat.v1.layers.conv2d(k2, 25, [5, 5], (5, 5), activation=tf.nn.relu,
             kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay), name='l2')
 
         # Across-Patch Features
-        m1 = tf.layers.conv2d(l1, 25, [3, 3], activation=tf.nn.relu,
+        m1 = tf.compat.v1.layers.conv2d(l1, 25, [3, 3], activation=tf.nn.relu,
             kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay), name='m1')
-        pool_m1 = tf.layers.max_pooling2d(m1, [2, 2], [2, 2], padding='same', name='pool_m1')
+        pool_m1 = tf.compat.v1.layers.max_pooling2d(m1, [2, 2], [2, 2], padding='same', name='pool_m1')
         m2 = tf.layers.conv2d(l2, 25, [3, 3], activation=tf.nn.relu,
             kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay), name='m2')
-        pool_m2 = tf.layers.max_pooling2d(m2, [2, 2], [2, 2], padding='same', name='pool_m2')
+        pool_m2 = tf.compat.v1.layers.max_pooling2d(m2, [2, 2], [2, 2], padding='same', name='pool_m2')
 
         # Higher-Order Relationships
         concat = tf.concat([pool_m1, pool_m2], axis=3)
         reshape = tf.reshape(concat, [FLAGS.batch_size, -1])
-        fc1 = tf.layers.dense(reshape, 500, tf.nn.relu, name='fc1')
-        fc2 = tf.layers.dense(fc1, 2, name='fc2')
+        fc1 = tf.compat.v1.layers.dense(reshape, 500, tf.nn.relu, name='fc1')
+        fc2 = tf.compat.v1.layers.dense(fc1, 2, name='fc2')
 
         return fc2
 
