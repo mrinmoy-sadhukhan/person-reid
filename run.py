@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 import cuhk03_dataset
 xrange=range
-FLAGS = tf.flags.FLAGS
+FLAGS = tf.compat.v1.flags.FLAGS
 tf.flags.DEFINE_integer('batch_size', '150', 'batch size for training')
 tf.flags.DEFINE_integer('max_steps', '210000', 'max steps for training')
 tf.flags.DEFINE_string('logs_dir', 'logs/', 'path to logs directory')
