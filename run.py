@@ -4,6 +4,7 @@ import cv2
 import cuhk03_dataset
 xrange=range
 FLAGS = tf.compat.v1.flags.FLAGS
+tf.compat.v1.disable_eager_execution()
 tf.compat.v1.flags.DEFINE_integer('batch_size', '150', 'batch size for training')
 tf.compat.v1.flags.DEFINE_integer('max_steps', '210000', 'max steps for training')
 tf.compat.v1.flags.DEFINE_string('logs_dir', 'logs/', 'path to logs directory')
